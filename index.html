@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071016" />
+    <title>静穏 — Ambient Wall Display</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Noto+Sans+JP:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-time-mode="day" data-presence="present">
+    <main id="ambient-display" class="relative h-screen w-screen overflow-hidden" aria-label="Ambient room display">
+      <div class="atmosphere" aria-hidden="true">
+        <div class="atmosphere-glow atmosphere-glow--top"></div>
+        <div class="atmosphere-glow atmosphere-glow--bottom"></div>
+        <svg class="wave-field" viewBox="0 0 1000 1600" preserveAspectRatio="none">
+          <path class="wave wave--one" d="M-100 970 C 180 800, 320 1140, 610 960 S 980 820, 1130 1010" />
+          <path class="wave wave--two" d="M-120 1040 C 210 860, 380 1170, 650 1010 S 930 900, 1120 1080" />
+          <path class="wave wave--three" d="M-140 900 C 130 780, 370 1030, 600 890 S 960 780, 1160 950" />
+        </svg>
+        <div id="particle-field" class="particle-field"></div>
+      </div>
+
+      <section id="normal-ui" class="normal-ui burn-in-drift" aria-label="Current room information">
+        <header class="clock-block">
+          <time id="clock" class="clock" datetime="">--:--</time>
+          <p id="date" class="date">—</p>
+        </header>
+
+        <aside class="quiet-info" aria-label="Tomorrow weather and next calendar event">
+          <div class="weather-line">
+            <div>
+              <p class="eyebrow">明日の天気</p>
+              <div class="weather-primary">
+                <span id="weather-icon" class="weather-icon" aria-hidden="true">☾</span>
+                <span id="temperature">--° / --°</span>
+              </div>
+            </div>
+            <p id="humidity" class="weather-humidity">湿度 --%</p>
+          </div>
+
+          <div class="event-line">
+            <p class="eyebrow">次の予定</p>
+            <p id="event-time" class="event-time">--:--</p>
+            <p id="event-title" class="event-title">静かな一日</p>
+          </div>
+        </aside>
+      </section>
+
+      <section id="minor-alert" class="minor-alert" aria-live="polite" aria-hidden="true">
+        <p class="eyebrow">地震情報</p>
+        <p class="minor-alert-title"><span id="minor-scale">3</span>　<span id="minor-area">—</span></p>
+        <p id="minor-origin" class="minor-alert-detail">震源地 —</p>
+      </section>
+
+      <section id="emergency" class="emergency" aria-live="assertive" aria-hidden="true">
+        <div class="emergency-inner">
+          <p id="emergency-kicker" class="emergency-kicker">地震情報</p>
+          <div class="scale-lockup">
+            <p class="scale-label">震度</p>
+            <p id="emergency-scale" class="scale-number">4</p>
+          </div>
+          <p id="emergency-area" class="emergency-area">—</p>
+          <div class="emergency-details">
+            <p><span>震源地</span><strong id="emergency-origin">—</strong></p>
+            <p><span>津波情報</span><strong id="emergency-tsunami">調査中</strong></p>
+          </div>
+          <p class="emergency-guidance">落ち着いて、身の安全を確保してください</p>
+        </div>
+      </section>
+
+      <button id="fullscreen-button" class="fullscreen-button" type="button" aria-label="Enter fullscreen">全画面</button>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
